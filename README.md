@@ -494,7 +494,7 @@ Unsure why the `Slave Number` field is sent by the master. See
     |    4 | IP/Mask?
     |    4 | Port?
     |   88 | Unknown
-    |    4 | Clipboard format list (sz = 4 * N)
+    |   sz | Clipboard format list (sz = 4 * N)
     |   ?? | Zeros / Garbage
 
 Send by a slave upon *Cursor Return* to its master (either by shortcut or 
