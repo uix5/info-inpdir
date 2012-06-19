@@ -167,12 +167,11 @@ configured shortcut (fi: switching slaves via keyboard). This is then clear
 from the `Number of Input Events` field.
 
 The `Slave Number` field contains a unique integer which allows ID to determine
-from which slave a *Cursor Exit* or *Shortcut Cursor Return* 
-packet originated. It is unclear why the `Source Address` field from the 
-*Common Part* isn't used for this or why this number is sent with every 
-*Input Event*. Each number seems to correspond to an index on an ID internal 
-list of known slaves and changes whenever the slaves are changed on the 
-*Master Configuration* tab.
+from which slave a *Cursor Exit* packet originated. It is unclear why the 
+`Source Address` field from the *Common Part* isn't used for this or why this 
+number is sent with every *Input Event*. Each number seems to correspond to 
+an index on an ID internal list of known slaves and changes whenever the slaves
+are changed on the *Master Configuration* tab.
 
 `Master KB Layout`: masters send their currently configured keyboard layout with 
 each *Input Event* in case that option is enabled on the *Master Preferences* 
@@ -450,7 +449,7 @@ that is not properly cleared.
     |    4 | Exit Side
     |   84 | Zeros / Garbage
 
-Send by a slave upon switching input focus to another slave or the master 
+Send by a slave upon switching input focus to the master or another slave  
 by mouse movement (as opposed to via a hotkey, see 
 *0x09 - Shortcut Cursor Return*).
 
@@ -468,7 +467,7 @@ Unknown. Never seen.
 
 
 
-### 0x09 - Shortcut Cursor Return (S → M) ###
+### 0x09 - Shortcut Cursor Return (M → S) ###
 
     | Size | Name / Description
     +------+-------------------
@@ -478,11 +477,11 @@ Unknown. Never seen.
     |    4 | Slave Number
     |   88 | Zeros / Garbage
 
-Send by a slave upon switching input focus to another slave or to the master 
+Send by a master upon switching input focus to another slave or to the master 
 by pressing the appropriate hotkey(s).
 
-The `Slave Number` field is used by the master to identify from which slave 
-the transition originated. See *0x03 - Cursor Enter* for more information.
+Unsure why the `Slave Number` field is sent by the master. See 
+*0x02 - Input Event* for more information on this field.
 
 
 
