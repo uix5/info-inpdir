@@ -1,7 +1,7 @@
 
 Input Director UDP Protocol Description
 =======================================
-v1.01
+v1.03
 
 
 Introduction
@@ -227,7 +227,7 @@ to be used for either type, and are always equal to 0.
     |   sz | Clipboard format list (sz = 4 * N)
     |   ?? | Zeros / Garbage
 
-Send by a master when the cursor transitions to a slave (using a shortcut or
+Sent by a master when the cursor transitions to a slave (using a shortcut or
 via mouse movement), either from the master itself, or from another slave. 
 Should be followed by a *Cursor Enter ACK* within a configurable time-out 
 (under *Advanced* on the *Master Preferences* tab), otherwise the slave is 
@@ -389,7 +389,7 @@ maximum to the number of entries (packet grows with each extra format).
     |    4 | Unknown1
     |   84 | Zeros / Garbage
 
-Send by a slave upon receiving a *Cursor Enter* packet from a known master.
+Sent by a slave upon receiving a *Cursor Enter* packet from a known master.
 
 `Lock Flags` contains a bitmask representing the state of the Scroll, Num and
 Caps Lock keys of the slave. Mask values:
@@ -411,7 +411,7 @@ updated to reflect those of the slave.
     |   64 | Common part
     |  100 | Zeros / Garbage
 
-Send by a master as part of the session setup exchange after it has received
+Sent by a master as part of the session setup exchange after it has received
 a *Session Setup ACK* from a prospective slave.
 
 
@@ -427,7 +427,7 @@ a *Session Setup ACK* from a prospective slave.
     |    4 | Flags?
     |   84 | Zeros / Garbage
 
-Send by a slave upon receiving a *Slave Config Request* in a session setup
+Sent by a slave upon receiving a *Slave Config Request* in a session setup
 exchange. Contains information on the screen resolution of the slave.
 
 `ACK on Sequence Number` contains the `Sequence Number` of the 
@@ -449,7 +449,7 @@ that is not properly cleared.
     |    4 | Exit Side
     |   84 | Zeros / Garbage
 
-Send by a slave upon switching input focus to the master or another slave  
+Sent by a slave upon switching input focus to the master or another slave  
 by mouse movement (as opposed to via a hotkey, see 
 *0x09 - Shortcut Cursor Return*).
 
@@ -477,7 +477,7 @@ Unknown. Never seen.
     |    4 | Slave Number
     |   88 | Zeros / Garbage
 
-Send by a master upon switching input focus to another slave or to the master 
+Sent by a master upon switching input focus to another slave or to the master 
 by pressing the appropriate hotkey(s).
 
 Unsure why the `Slave Number` field is sent by the master. See 
@@ -497,7 +497,7 @@ Unsure why the `Slave Number` field is sent by the master. See
     |   sz | Clipboard format list (sz = 4 * N)
     |   ?? | Zeros / Garbage
 
-Send by a slave upon *Cursor Return* to its master (either by shortcut or 
+Sent by a slave upon *Cursor Return* to its master (either by shortcut or 
 through mouse movement) in case the slave's clipboard is non-empty and 
 the *Share Clipboard* feature is enabled.
 
@@ -526,7 +526,7 @@ Unknown. Never seen.
     |    4 | State
     |   96 | Zeros / Garbage
 
-Send by master on activation and deactivation of the screensaver.
+Sent by master on activation and deactivation of the screensaver.
 
 Observed values for `State`:
 
@@ -542,7 +542,7 @@ Observed values for `State`:
     |   64 | Common part
     |  100 | Zeros / Garbage
 
-Send by master upon locking the master or when selecting the 
+Sent by master upon locking the master or when selecting the 
 *Lock Slaves and Master* menu option.
 
 
@@ -554,7 +554,7 @@ Send by master upon locking the master or when selecting the
     |   64 | Common part
     |  100 | Zeros / Garbage
 
-Send by master when selecting the *Shutdown Slaves and Master* menu option, or
+Sent by master when selecting the *Shutdown Slaves and Master* menu option, or
 when pressing the *Shutdown Slave Workstations* button.
 
 
@@ -566,7 +566,7 @@ when pressing the *Shutdown Slave Workstations* button.
     |   64 | Common part
     |  100 | Zeros / Garbage
 
-Send by master every 120 seconds of inactivity.
+Sent by master every 120 seconds of inactivity.
 
 
 
@@ -577,7 +577,7 @@ Send by master every 120 seconds of inactivity.
     |   64 | Common part
     |  100 | Zeros / Garbage
 
-Send by a master upon pressing the *Ctrl+Alt+Delete equivalent for slave systems*
+Sent by a master upon pressing the *Ctrl+Alt+Delete equivalent for slave systems*
 hotkey (*Master Preferences* tab).
 
 
@@ -596,14 +596,14 @@ hotkey (*Master Preferences* tab).
     |   45 | Slave Screen Setup
     |   sz | Focus Hostname (sz = N)
 
-Send by a master to inform all slaves of configuration changes: 
+Sent by a master to inform all slaves of configuration changes: 
 
  * adding to or editing a slave on the master configuration (screens, layout, 
    hotkeys, etc)
  * changes to the screen layout on the *Master Configuration* tab
  * changes to the master's number of screens and / or their layout
 
-This packet is also send directly after a *Cursor Enter ACK* is received by a
+This packet is also sent directly after a *Cursor Enter ACK* is received by a
 master, to inform all slaves about the slave that has input focus. This is
 probably used for updating the *Information Window* (*Global Preferences* tab),
 which displays the hostname and an arrow pointing towards the active screen.
@@ -650,7 +650,7 @@ Unknown. Never seen.
     |    4 | State
     |   96 | Zeros / Garbage
 
-Send by master on pressing the *Enable / Disable screen edge transitions* 
+Sent by master on pressing the *Enable / Disable screen edge transitions* 
 hotkey (*Master Preferences* tab).
 
 Observed values for `State`:
@@ -667,7 +667,7 @@ Observed values for `State`:
     |   64 | Common part
     |  100 | Zeros / Garbage
 
-Send when:
+Sent when:
 
  * ID process is terminated (because of exit or shutdown / reboot)
  * machine goes into standby
@@ -692,7 +692,7 @@ Unknown. Never seen.
     |    2 | Unknown
     |   92 | Zeros / Garbage
 
-Send by a slave upon receiving a *Session Setup* and *Slave Config Request*
+Sent by a slave upon receiving a *Session Setup* and *Slave Config Request*
 with encryption enabled, but for which the configuration or the password test
 byte do not equal those of the master ('None' is also considered an encryption
 type).
@@ -712,7 +712,7 @@ configuration of the intended slave.
     |   64 | Common part
     |  100 | Zeros / Garbage
 
-Send by a master to start a new session with a slave, either because the slave
+Sent by a master to start a new session with a slave, either because the slave
 was just added to the configuration of the master, or for some other reason.
 
 The *Session Key* in the *Common part* of this packet is the key that will be
@@ -730,7 +730,7 @@ TODO: encryption checking and rejection.
     |   64 | Common part
     |  100 | Zeros / Garbage
 
-Send by a slave in response to a *Session Setup* packet.
+Sent by a slave in response to a *Session Setup* packet.
 
 This packet is needed for the master to continue to the *Slave Config Request*
 state (see *0x05 - Slave Config Request*).
@@ -744,7 +744,7 @@ state (see *0x05 - Slave Config Request*).
     |   64 | Common part
     |  100 | Zeros / Garbage
 
-Send by ID in slave mode every 5 seconds, for as long as it doesn't have an 
+Sent by ID in slave mode every 5 seconds, for as long as it doesn't have an 
 active master.
 
 
@@ -756,7 +756,7 @@ active master.
     |   64 | Common part
     |  100 | Zeros / Garbage
 
-Send every 120 seconds of inactivity.
+Sent every 120 seconds of inactivity.
 
 
 
