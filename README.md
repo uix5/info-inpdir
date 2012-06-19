@@ -142,7 +142,7 @@ Unknown. Never seen.
     |   64 | Common part
     |    4 | Number of Input Events (N)
     |    4 | Unknown1 (D:1)
-    |    4 | Unknown2 (D:0)
+    |    4 | Slave Number
     |    2 | Master KB Layout
     |    2 | Flags
     |   16 | Unknown3
@@ -166,9 +166,17 @@ key presses can occur in one packet, but only if they combine into an ID
 configured shortcut (fi: switching slaves via keyboard). This is then clear
 from the `Number of Input Events` field.
 
-Masters will send their currently configured keyboard layout with each 
-*Input Event* in case that option is enabled on the *Master Preferences* tab 
-of ID. The number is the language identifier of the keyboard layout. See
+The `Slave Number` field contains a unique integer which allows ID to determine
+from which slave a *Cursor Exit* or *Shortcut Cursor Return* 
+packet originated. It is unclear why the `Source Address` field from the 
+*Common Part* isn't used for this or why this number is sent with every 
+*Input Event*. Each number seems to correspond to an index on an ID internal 
+list of known slaves and changes whenever the slaves are changed on the 
+*Master Configuration* tab.
+
+`Master KB Layout`: masters send their currently configured keyboard layout with 
+each *Input Event* in case that option is enabled on the *Master Preferences* 
+tab of ID. The number is the language identifier of the keyboard layout. See
 [Language Identifier Constants and Strings][] on MSDN for more information.
 
 Observed values for `Flags`:
@@ -202,7 +210,7 @@ to be used for either type, and are always equal to 0.
     | Size | Name / Description
     +------+-------------------
     |   64 | Common part
-    |    4 | Unknown0 (D:1)
+    |    4 | Slave Number
     |    4 | Unknown1 (D:0)
     |    4 | Neighbours
     |   20 | Unknown2
@@ -226,6 +234,10 @@ Should be followed by a *Cursor Enter ACK* within a configurable time-out
 (under *Advanced* on the *Master Preferences* tab), otherwise the slave is 
 considered to be unresponsive and ID will ask the user if that slave should 
 be skipped.
+
+The `Slave Number` field is identical to the one in the *Input Event* packet.
+It seems to be used here to be able to identify later from which slave a cursor 
+transition originated.
 
 The `Neighbours` field contains a bitmask indicating at which edges of its
 screen a slave has other slaves. Mask values observed:
@@ -432,7 +444,7 @@ that is not properly cleared.
     | Size | Name / Description
     +------+-------------------
     |   64 | Common part
-    |    4 | Unknown0
+    |    4 | Slave Number
     |    4 | Unknown1
     |    4 | Exit Abs Coord
     |    4 | Exit Side
@@ -442,10 +454,8 @@ Send by a slave upon switching input focus to another slave or the master
 by mouse movement (as opposed to via a hotkey, see 
 *0x09 - Shortcut Cursor Return*).
 
-Both `Unknown` fields seem to have something to do with where the cursor is
-coming from (from which slave), with integers corresponding to the order in
-which slaves where added to a master's configuration (on the 
-*Master Configuration* tab).
+The `Slave Number` field is used by the master to identify from which slave 
+the transition originated. See *0x03 - Cursor Enter* for more information.
 
 For a description of the `Exit Abs Coord` and `Exit Side` fields, see their
 complementary fields in *0x03 - Cursor Enter*.
@@ -465,11 +475,14 @@ Unknown. Never seen.
     |   64 | Common part
     |    4 | Unknown0
     |    4 | Unknown1
-    |    4 | Unknown2
+    |    4 | Slave Number
     |   88 | Zeros / Garbage
 
 Send by a slave upon switching input focus to another slave or to the master 
 by pressing the appropriate hotkey(s).
+
+The `Slave Number` field is used by the master to identify from which slave 
+the transition originated. See *0x03 - Cursor Enter* for more information.
 
 
 
@@ -765,7 +778,7 @@ document.
     | 0x06 | Slave Config Reply
     | 0x07 | Cursor Exit
     | 0x08 | Unknown
-    | 0x09 | Cursor Return Shortcut
+    | 0x09 | Shortcut Cursor Return
     | 0x0A | Slave Clipboard Status
     | 0x0B | Input Mirror
     | 0x0C | Unknown
