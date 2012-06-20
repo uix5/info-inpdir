@@ -62,8 +62,8 @@ ID Packet Formats
 
 This section describes the various packets sent and received by ID during 
 normal program usage. They are listed in order of their packet id. Their names
-are purely derived from their content and / or perceived purpose and are most
-certainly not their 'official' names.
+(and those of the fields they contain) are purely derived from their content 
+and / or perceived purpose and are most certainly not their 'official' names.
 
 All fields are Little Endian, unless indicated otherwise.
 
