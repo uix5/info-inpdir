@@ -268,8 +268,9 @@ Absolute mouse coordinates can be calculated using the formulae:
     x_abs = (x / screenWidth) * 65536 
     y_abs = (y / screenHeight) * 65536
 
-This allows the mouse cursor to appear at the proper location when using slaves 
-with different screen resolutions (see also [MOUSEINPUT structure][]).
+The inverse should be used to calculate the correct coordinates for the screen
+resolutions of the slaves. This allows the mouse cursor to appear at the proper 
+location (see also [MOUSEINPUT structure][]).
 
 `Enter Side` indicates which screen edge was transitioned by the cursor. Values
 are identical to those in the `Neighbours` field, with one addition:
