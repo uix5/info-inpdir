@@ -28,8 +28,8 @@ Outline of This Document
  * Introduction
  * Outline
  * General Protocol Information
- * ID Packet Formats
  * List of Packet Types
+ * ID Packet Formats
  * TODO
 
 
@@ -53,6 +53,47 @@ focus, keyboard / mouse input events and commands such as lock workstation,
 shutdown or (de)activate the screensaver.
 
 TODO: add info on the GUID in the packets
+
+
+
+
+List of Packet Types
+--------------------
+
+The list of observed packet types and their names, as described in this 
+document.
+
+    | ID   | Name
+    +------+-------------------
+    | 0x01 | Unknown
+    | 0x02 | Input Event
+    | 0x03 | Cursor Enter
+    | 0x04 | Cursor Enter ACK
+    | 0x05 | Slave Config Request
+    | 0x06 | Slave Config Reply
+    | 0x07 | Cursor Exit
+    | 0x08 | Unknown
+    | 0x09 | Shortcut Cursor Return
+    | 0x0A | Slave Clipboard Status
+    | 0x0B | Input Mirror
+    | 0x0C | Unknown
+    | 0x0D | Unknown
+    | 0x0E | Unknown
+    | 0x0F | Screensaver State
+    | 0x10 | Slave Lock
+    | 0x11 | Slave Shutdown
+    | 0x12 | Master Heartbeat
+    | 0x13 | Slave Ctrl+Alt+Delete
+    | 0x14 | Configuration Update
+    | 0x15 | Unknown
+    | 0x16 | Disable Edge Transitions
+    | 0x17 | Session Termination
+    | 0x18 | Unknown
+    | 0x19 | Encryption Config Mismatch
+    | 0x1A | Session Setup
+    | 0x1B | Session Setup ACK
+    | 0x1C | Slave Announce
+    | 0x1D | Slave Heartbeat
 
 
 
@@ -761,47 +802,6 @@ active master.
     |  100 | Zeros / Garbage
 
 Sent every 120 seconds of inactivity.
-
-
-
-
-List of Packet Types
---------------------
-
-The list of observed packet types and their names, as described in this 
-document.
-
-    | ID   | Name
-    +------+-------------------
-    | 0x01 | Unknown
-    | 0x02 | Input Event
-    | 0x03 | Cursor Enter
-    | 0x04 | Cursor Enter ACK
-    | 0x05 | Slave Config Request
-    | 0x06 | Slave Config Reply
-    | 0x07 | Cursor Exit
-    | 0x08 | Unknown
-    | 0x09 | Shortcut Cursor Return
-    | 0x0A | Slave Clipboard Status
-    | 0x0B | Input Mirror
-    | 0x0C | Unknown
-    | 0x0D | Unknown
-    | 0x0E | Unknown
-    | 0x0F | Screensaver State
-    | 0x10 | Slave Lock
-    | 0x11 | Slave Shutdown
-    | 0x12 | Master Heartbeat
-    | 0x13 | Slave Ctrl+Alt+Delete
-    | 0x14 | Configuration Update
-    | 0x15 | Unknown
-    | 0x16 | Disable Edge Transitions
-    | 0x17 | Session Termination
-    | 0x18 | Unknown
-    | 0x19 | Encryption Config Mismatch
-    | 0x1A | Session Setup
-    | 0x1B | Session Setup ACK
-    | 0x1C | Slave Announce
-    | 0x1D | Slave Heartbeat
 
 
 
