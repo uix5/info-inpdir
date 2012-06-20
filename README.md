@@ -1,7 +1,7 @@
 
 Input Director UDP Protocol Description
 =======================================
-v1.03
+v1.04
 
 
 Introduction
@@ -15,6 +15,9 @@ was performed (or needed).
 
 The TCP protocol used for the *Share Clipboard* feature of ID is not described
 in this document.
+
+See [uix5/packet-inpdir-udp][] for a Wireshark dissector for the protocol
+described here.
 
 
 
@@ -805,7 +808,7 @@ document.
 TODO
 ----
 
- * Figure out packet types 0x01, 0x08, 0x0C, 0x0D, 0x0E and 0x18 (get 
+ * Figure out packet types 0x01, 0x08, 0x0C, 0x0D, 0x0E, 0x18 and 0x1E (get 
    captures)
  * Determine whether the 'header' is actually `Header Length` long, instead of
    only the first 64 bytes. That would explain why there are so many 'duplicate'
@@ -819,6 +822,7 @@ TODO
 
 
 [wireshark]:            http://www.wireshark.org
+[uix5/packet-inpdir-udp]: http://www.github.com/uix5/packet-inpdir-udp
 [INPUT structure]:      http://msdn.microsoft.com/en-us/library/windows/desktop/ms646270
 [KEYBDINPUT structure]: http://msdn.microsoft.com/en-us/library/windows/desktop/ms646271
 [MOUSEINPUT structure]: http://msdn.microsoft.com/en-us/library/windows/desktop/ms646273
