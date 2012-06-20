@@ -1,7 +1,7 @@
 
 Input Director UDP Protocol Description
 =======================================
-v1.05
+v1.06
 
 
 Introduction
@@ -637,7 +637,7 @@ hotkey (*Master Preferences* tab).
     |    4 | Focus IP (BE)
     |    2 | Focus Screen X
     |    2 | Focus Screen Y
-    |   84 | Unknown0 (84)
+    |   84 | Unknown0
     |   45 | Slave Screen Setup
     |   sz | Focus Hostname (sz = N)
 
