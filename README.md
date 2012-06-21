@@ -517,13 +517,18 @@ Unknown. Never seen.
     | Size | Name / Description
     +------+-------------------
     |   64 | Common part
-    |    4 | Unknown0
+    |    4 | Shortcut Key Count?
     |    4 | Unknown1
     |    4 | Slave Number
     |   88 | Zeros / Garbage
 
 Sent by a master upon switching input focus to another slave or to the master 
 by pressing the appropriate hotkey(s).
+
+The `Shortcut Key Count` field seems to represent the number of keys that make 
+up the particular shortcut used. For instance, if the shortcut to go to the 
+screen to the right of the current screen is `Ctrl + Alt + Right Arrow`, this 
+number would be 3.
 
 Unsure why the `Slave Number` field is sent by the master. See 
 *0x02 - Input Event* for more information on this field.
