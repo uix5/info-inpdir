@@ -1,7 +1,7 @@
 
 Input Director UDP Protocol Description
 =======================================
-v1.07
+v1.08
 
 
 Introduction
@@ -119,6 +119,7 @@ All fields are Little Endian, unless indicated otherwise.
     | N,C,.. |               | Pseudo variable name, used in calculations
     | Xz     | Size          | Calculated size of a particular field
     | ?      | Unsure        | Probably correct, but still unsure
+    | G      | Ghost         | Field most likely a 'ghost', not properly reset
 
 Overview of the use of symbols in this document.
 
@@ -192,12 +193,12 @@ Unknown. Never seen.
     |   16 | Unknown3
     |    4 | Unknown4
     |    4 | Unknown5
-    |    4 | Unknown6
-    |    4 | Cursor Origin?
-    |    4 | Clipboard format list len?
+    |    4 | Enter Abs Coord? (G)
+    |    4 | Enter Side? (G)
+    |    4 | Clipboard format list len? (G)
     |    4 | IP/Mask?
     |    4 | Port?
-    |   20 | Mouse Settings
+    |   20 | Mouse Settings (G)
     |    4 | Cursor Transition Settings
     |   16 | Unknown7
     |   sz | Input events (sz = 24 * N)
@@ -227,9 +228,9 @@ Observed values for `Flags`:
  * 0x00: slave uses its own KB layout 
  * 0x02: slave uses master's KB layout
 
-The `Cursor Origin` and `Clipboard format list len` fields could be 'ghosts' of 
-those fields in *Cursor Enter* packets, which are not properly cleared. See 
-*0x03 - Cursor Enter* for details.
+The `Enter Side`, `Enter Abs Coord` and `Clipboard format list len` fields 
+seem to be 'ghosts' of those fields in *Cursor Enter* packets, which are not
+properly cleared. See *0x03 - Cursor Enter* for details.
 
 The function of the `IP/Mask` and `Port` fields is unknown. No other values
 than 0xFFFFFFFF and 0x7A02 (31234) have been observed.
@@ -469,7 +470,7 @@ a *Session Setup ACK* from a prospective slave.
     |    4 | ACK on Sequence Number
     |    4 | Screen Resolution Width
     |    4 | Screen Resolution Height
-    |    4 | Flags?
+    |    4 | Flags? (G)
     |   84 | Zeros / Garbage
 
 Sent by a slave upon receiving a *Slave Config Request* in a session setup
@@ -823,7 +824,10 @@ TODO
    strictly defined.
  * See if *Slave Config Reply* changes in situations with multiple monitors
    attached to slaves
-
+ * confirm whether `Mouse Settings` field in *Input Event* is a ghost or not by
+   programmatically changing mouse settings on master with input focus on a 
+   slave and ID configured to use master's preferences on slaves. The 
+   `Mouse Settings` field should reflect the changes in every *Input Event*
 
 
 
