@@ -1,7 +1,7 @@
 
 Input Director UDP Protocol Description
 =======================================
-v1.06
+v1.07
 
 
 Introduction
