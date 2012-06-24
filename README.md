@@ -73,15 +73,15 @@ document.
     | 0x06 | Slave Config Reply
     | 0x07 | Cursor Exit
     | 0x08 | Unknown
-    | 0x09 | Shortcut Cursor Return
+    | 0x09 | Cursor Exit Shortcut
     | 0x0A | Slave Clipboard Status
     | 0x0B | Input Mirror
     | 0x0C | Unknown
     | 0x0D | Unknown
     | 0x0E | Unknown
     | 0x0F | Screensaver State
-    | 0x10 | Slave Lock
-    | 0x11 | Slave Shutdown
+    | 0x10 | Lock Slave
+    | 0x11 | Shutdown Slave
     | 0x12 | Master Heartbeat
     | 0x13 | Slave Ctrl+Alt+Delete
     | 0x14 | Configuration Update
@@ -497,7 +497,7 @@ that is not properly cleared.
 
 Sent by a slave upon switching input focus to the master or another slave  
 by mouse movement (as opposed to via a hotkey, see 
-*0x09 - Shortcut Cursor Return*).
+*0x09 - Cursor Exit Shortcut*).
 
 The `Slave Number` field is used by the master to identify from which slave 
 the transition originated. See *0x03 - Cursor Enter* for more information.
@@ -513,7 +513,7 @@ Unknown. Never seen.
 
 
 
-### 0x09 - Shortcut Cursor Return (M → S) ###
+### 0x09 - Cursor Exit Shortcut (M → S) ###
 
     | Size | Name / Description
     +------+-------------------
@@ -586,7 +586,7 @@ Observed values for `State`:
 
 
 
-### 0x10 - Slave Lock (M → S) ###
+### 0x10 - Lock Slave (M → S) ###
 
     | Size | Name / Description
     +------+-------------------
@@ -598,7 +598,7 @@ Sent by master upon locking the master or when selecting the
 
 
 
-### 0x11 - Slave Shutdown (M → S) ###
+### 0x11 - Shutdown Slave (M → S) ###
 
     | Size | Name / Description
     +------+-------------------
