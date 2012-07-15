@@ -297,7 +297,7 @@ These are bitwise OR-ed in case there are multiple neighbours for one slave.
 
 `Unknown3` has only been observed to be equal to 6. Function unknown.
 
-`Unknown4` is either 0 or 0xC0565000. Function unknown.
+`Unknown4` seems to contain unitialized memory (values appear to be semi-random).
 
 The `Enter Abs Coord` is the absolute mouse coordinate at the edge where the 
 cursor entered the screen.
