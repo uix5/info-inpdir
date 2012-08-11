@@ -138,10 +138,10 @@ Overview of the use of symbols in this document.
     |   16 | Session Key
     |    4 | Source Address (BE)
     |    4 | Source Listening Port
-    |    4 | Unknown0
+    |    4 | Header Length Repeat?
     |    1 | Encryption Type
     |    1 | Encryption Password Test
-    |    2 | Unknown1
+    |    2 | Encryption Unknown0
 
 Each packet contains a common part of 64 bytes:
 
@@ -159,7 +159,7 @@ and is used by the slave to be able to tell masters apart (example:
 have not been presented in a *Session Setup* exchange) are considered 
 unauthenticated and ignored.
 
-The `Unknown` field seems a repeat of `Header Length`.
+The `Header Length Repeat` field seems a repeat of `Header Length`.
 
 `Encryption Type` contains the type of encryption used in a packet. Observed values are:
 
