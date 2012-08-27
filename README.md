@@ -190,9 +190,7 @@ Unknown. Never seen.
     |    4 | Slave Number
     |    2 | Master KB Layout
     |    2 | Flags
-    |   16 | Unknown3
-    |    4 | Unknown4
-    |    4 | Unknown5
+    |   24 | Slave Neighbour List (G, incomplete)
     |    4 | Enter Abs Coord? (G)
     |    4 | Enter Side? (G)
     |    4 | Clipboard format list len? (G)
@@ -228,9 +226,10 @@ Observed values for `Flags`:
  * 0x00: slave uses its own KB layout 
  * 0x02: slave uses master's KB layout
 
-The `Enter Side`, `Enter Abs Coord` and `Clipboard format list len` fields 
-seem to be 'ghosts' of those fields in *Cursor Enter* packets, which are not
-properly cleared. See *0x03 - Cursor Enter* for details.
+The `Slave Neighbour List`, `Enter Side`, `Enter Abs Coord` and 
+`Clipboard format list len` fields seem to be (incomplete) 'ghosts' of those 
+fields in *Cursor Enter* packets, which are not properly cleared. See 
+*0x03 - Cursor Enter* for details.
 
 The function of the `IP/Mask` and `Port` fields is unknown. No other values
 than 0xFFFFFFFF and 0x7A02 (31234) have been observed.
