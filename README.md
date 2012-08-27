@@ -1,7 +1,7 @@
 
 Input Director UDP Protocol Description
 =======================================
-v1.10
+v1.11
 
 
 Introduction
@@ -88,7 +88,7 @@ document.
     | 0x15 | Unknown
     | 0x16 | Disable Edge Transitions
     | 0x17 | Session Termination
-    | 0x18 | Unknown
+    | 0x18 | Multi-monitor Edge Traversal
     | 0x19 | Encryption Config Mismatch
     | 0x1A | Session Setup
     | 0x1B | Session Setup ACK
@@ -726,9 +726,22 @@ Sent when:
 
 
 
-### 0x18 - Unknown ###
+### 0x18 - Multi-monitor Edge Traversal (S → M) ###
 
-Unknown. Never seen.
+    | Size | Name / Description
+    +------+-------------------
+    |   64 | Common part
+    |    4 | Unknown0
+    |    4 | Unknown1
+    |    4 | Unknown2
+    |   88 | Zeros / Garbage
+
+Sent by a slave with multiple monitors configured when the mouse cursor 
+transitions from one monitor to another. Upon reception of this packet, the
+master sends a *Config Update* to the slave.
+
+The `Unknown` fields contain integers that identify either the monitor that gets
+focus, or the one that lost focus.
 
 
 
@@ -839,3 +852,4 @@ TODO
 
 [Language Identifier Constants and Strings]: http://msdn.microsoft.com/en-us/library/windows/desktop/dd318693
 [Standard Clipboard Formats]: http://msdn.microsoft.com/en-us/library/windows/desktop/ff729168
+
