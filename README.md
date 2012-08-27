@@ -731,7 +731,8 @@ Observed values for `State`:
 Sent when:
 
  * ID process is terminated (because of exit or shutdown / reboot)
- * machine goes into standby
+ * Machine goes into standby
+ * User switches to another user account (with Fast User Switching)
  * ID is disabled (via *Disable Input Director* on the *Main* tab)
 
 
