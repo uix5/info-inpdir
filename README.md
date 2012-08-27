@@ -255,11 +255,9 @@ to be used for either type, and are always equal to 0.
     +------+-------------------
     |   64 | Common part
     |    4 | Slave Number
-    |    4 | Unknown1 (D:0)
-    |    4 | Neighbours
-    |   20 | Unknown2
-    |    4 | Unknown3 (D:6)
-    |    4 | Unknown4 (D:0xC0565000)
+    |    2 | Slave Screen X?
+    |    2 | Slave Screen Y?
+    |   32 | Slave Neighbour List
     |    4 | Enter Abs Coord
     |    4 | Enter Side
     |    4 | Clipboard format list len? (N)
@@ -283,21 +281,34 @@ The `Slave Number` field is identical to the one in the *Input Event* packet.
 It seems to be used here to be able to identify later from which slave a cursor 
 transition originated.
 
-The `Neighbours` field contains a bitmask indicating at which edges of its
-screen a slave has other slaves. Mask values observed:
+The `Slave Screen X` and `Slave Screen Y` fields appear to represent an offset
+(dx, dy) to the active screen on a slave. For slaves with multiple monitors
+configured on the *Master Configuration* tab, these fields can be non-zero, 
+indicating to the slave on which monitor the mouse cursor should appear. For
+slaves with just one monitor, these fields are equal to zero. In case the 
+transition to the slave was initiated with a hotkey, these fields are equal to
+0xFFFF.
+
+The `Slave Neighbour List` field lists the neighbouring screens for each monitor
+configured for the slave that is entered. List entries are 4 bytes each, and
+contain a bitmask indicating at which edges of a screen are adjacent to screens
+of other slaves. Maximum length of the list is 8 screens. The number of entries 
+that contain valid information (as opposed to random or garbage data) can be 
+deduced from the number of screens described by the `Slave Screen Setup` field.
+
+    | Size | Name / Description
+    +------+-------------------
+    |   mz | Masks (sz = 4 * nr_of_screens)
+    |   gz | Garbage / Zeros (sz = 32 - mz)
+
+Mask values observed:
 
  * 0x01: Left
  * 0x02: Right
  * 0x04: Top
  * 0x08: Bottom
 
-These are bitwise OR-ed in case there are multiple neighbours for one slave.
-
-`Unknown2` is almost always 0. If not, values appear to be random?
-
-`Unknown3` has only been observed to be equal to 6. Function unknown.
-
-`Unknown4` is either 0 or 0xC0565000. Function unknown.
+These are bitwise OR-ed in case there are multiple neighbours for one screen.
 
 The `Enter Abs Coord` is the absolute mouse coordinate at the edge where the 
 cursor entered the screen.
