@@ -488,7 +488,7 @@ a *Session Setup ACK* from a prospective slave.
     |    4 | ACK on Sequence Number
     |    4 | Screen Resolution Width
     |    4 | Screen Resolution Height
-    |    4 | Flags? (G)
+    |    4 | Flags? (G?)
     |   84 | Zeros / Garbage
 
 Sent by a slave upon receiving a *Slave Config Request* in a session setup
