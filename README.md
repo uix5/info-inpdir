@@ -441,8 +441,10 @@ maximum to the number of entries (packet grows with each extra format).
     |   64 | Common part
     |    4 | ACK on Sequence Number
     |    4 | Lock Flags
-    |    4 | Unknown0
-    |    4 | Unknown1
+    |    2 | Slave Screen X?
+    |    2 | Slave Screen Y?
+    |    2 | Unknown1a
+    |    2 | Unknown1b
     |   84 | Zeros / Garbage
 
 Sent by a slave upon receiving a *Cursor Enter* packet from a known master.
@@ -457,6 +459,12 @@ Caps Lock keys of the slave. Mask values:
 Depending on the configuration of the master (*Mouse / Keyboard Preferences*
 on the *Master Preferences* tab), the state of those keys on the master is
 updated to reflect those of the slave.
+
+The `Slave Screen X` and `Slave Screen Y` fields appear to contain the 
+coordinates of the slave screen that the *Cursor Enter* packet specified.
+
+`Unknown1a` and `Unknown1b` also seem to contain some sort of coordinate pair,
+but it is not known what these represent.
 
 
 
@@ -742,9 +750,11 @@ Sent when:
     | Size | Name / Description
     +------+-------------------
     |   64 | Common part
-    |    4 | Unknown0
+    |    2 | Unknown0a
+    |    2 | Unknown0b
     |    4 | Unknown1
-    |    4 | Unknown2
+    |    2 | Unknown2a
+    |    2 | Unknown2b
     |   88 | Zeros / Garbage
 
 Sent by a slave with multiple monitors configured when the mouse cursor 
@@ -752,7 +762,7 @@ transitions from one monitor to another. Upon reception of this packet, the
 master sends a *Config Update* to the slave.
 
 The `Unknown` fields contain integers that identify either the monitor that gets
-focus, or the one that lost focus.
+focus, or the one that lost focus (unsure).
 
 
 
