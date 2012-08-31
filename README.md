@@ -508,7 +508,8 @@ that is not properly cleared.
     +------+-------------------
     |   64 | Common part
     |    4 | Slave Number
-    |    4 | Unknown1
+    |    2 | Destination Screen X?
+    |    2 | Destination Screen Y?
     |    4 | Exit Abs Coord
     |    4 | Exit Side
     |   84 | Zeros / Garbage
@@ -519,6 +520,10 @@ by mouse movement (as opposed to via a hotkey, see
 
 The `Slave Number` field is used by the master to identify from which slave 
 the transition originated. See *0x03 - Cursor Enter* for more information.
+
+The `Destination Screen X` and `Destination Screen Y` fields appear to contain
+the coordinates of the screen this slave wishes to transition the mouse cursor
+to.
 
 For a description of the `Exit Abs Coord` and `Exit Side` fields, see their
 complementary fields in *0x03 - Cursor Enter*.
