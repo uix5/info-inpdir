@@ -290,7 +290,7 @@ transition to the slave was initiated with a hotkey, these fields are equal to
 
 The `Slave Neighbour List` field lists the neighbouring screens for each monitor
 configured for the slave that is entered. List entries are 4 bytes each, and
-contain a bitmask indicating at which edges of a screen are adjacent to screens
+contain a bitmask indicating which edges of a screen are adjacent to screens
 of other slaves. Maximum length of the list is 8 screens. The number of entries 
 that contain valid information (as opposed to random or garbage data) can be 
 deduced from the number of screens described by the `Slave Screen Setup` field.
