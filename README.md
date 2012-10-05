@@ -664,8 +664,8 @@ hotkey (*Master Preferences* tab).
     |    4 | Config Valid
     |    4 | Focus Hostname strlen (N)
     |    4 | Focus IP (BE)
-    |    2 | Focus Screen X
-    |    2 | Focus Screen Y
+    |    2 | Focus Screen dX
+    |    2 | Focus Screen dY
     |   84 | Unknown0
     |   45 | Slave Screen Setup
     |   sz | Focus Hostname (sz = N)
@@ -686,17 +686,10 @@ The `Config Valid` field seems to indicate whether the last *Config Update* a
 slave received is still valid. Packets with a 0 here require a slave to reset
 their state (and possibly wait for a new update).
 
-The coordinate system used by ID has its x-axis pointing left, and its y-axis 
-pointing up, with the master at its origin:
-
-     1, 1 | 0, 1 | -1, 1
-    ---------------------
-     1, 0 |  M   | -1, 0
-    ---------------------
-     1,-1 | 0,-1 | -1,-1
-
-The `Focus Screen X` and `Focus Screen Y` fields seem to be used when drawing
-the arrow in the *Information Window*.
+The `Focus Screen dX` and `Focus Screen dY` fields are used in the calculation 
+of the angle under which the arrow in the *Information Window* is drawn. A
+negative value for dX causes the arrow to point to the left. A negative dY 
+results in a downward pointing arrow.
 
 The `Slave Screen Setup` field is identical to that in the *Cursor Enter* 
 packet. See *0x03 - Cursor Enter* for details. The two unknown fields in this
